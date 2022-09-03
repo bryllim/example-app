@@ -1,5 +1,14 @@
 @extends('layout.layout')
 @section('content')
+
+@if (Session::has('success'))
+<div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 mb-5" role="alert">
+  <div class="flex">
+      <p class="text-sm text-center">{{ Session::get('success') }}</p>
+  </div>
+</div>
+@endif
+
 <div class="overflow-x-auto">
     <table class="min-w-full text-sm divide-y divide-gray-200">
         <thead>

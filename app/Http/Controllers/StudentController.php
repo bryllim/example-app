@@ -23,7 +23,7 @@ class StudentController extends Controller
         $student->email = $request->email;
         $student->save();
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', 'New student added.');
 
     }
 }
