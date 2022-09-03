@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Models\Student;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,10 +15,10 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome')->with('students', Student::all());
 })->name('home');
 
-Route::get('/addstudent', function () {
+Route::get('/addstudent', function () { 
     return view('addstudent');
 })->name('addstudent');
 

@@ -37,18 +37,20 @@
         </thead>
 
         <tbody class="divide-y divide-gray-100">
+            @foreach($students as $student)
             <tr>
                 <td class="p-4 font-medium text-gray-900 whitespace-nowrap">
-                    John Doe
+                    {{ $student->name }}
                 </td>
-                <td class="p-4 text-gray-700 whitespace-nowrap">john.doe@email.com</td>
+                <td class="p-4 text-gray-700 whitespace-nowrap">{{ $student->email }}</td>
                 <td class="p-4 text-gray-700 whitespace-nowrap">Math</td>
                 <td class="p-4 text-gray-700 whitespace-nowrap">
                     <strong class="bg-red-100 text-red-700 px-3 py-1.5 rounded text-xs font-medium">
-                        74
+                        {{ $student->totalgrade }}
                     </strong>
                 </td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
