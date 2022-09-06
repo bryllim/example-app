@@ -13,6 +13,13 @@ class Subject extends Model
 
     protected $fillable = [
         'name',
-        'grade'
+        'grade',
+        'student_id',
     ];
+    
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
+
 }

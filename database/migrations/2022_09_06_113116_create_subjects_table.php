@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->integer('grade')->default(0);
             $table->timestamps();
+
+            $table->unsignedBigInteger('student_id');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+
         });
     }
 

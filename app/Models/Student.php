@@ -17,4 +17,8 @@ class Student extends Model
         'totalgrade'
     ];
 
+    public function subjects(){
+        return $this->hasMany(Subject::class);
+    }
+
 }
