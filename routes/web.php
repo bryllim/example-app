@@ -25,3 +25,7 @@ Route::get('/addstudent', function () {
 Route::post('/createstudent',
     [StudentController::class, 'create']
 )->name('createstudent');
+
+Route::get('/subjects', function () {
+    return view('subjects');
+})->name('subjects');
