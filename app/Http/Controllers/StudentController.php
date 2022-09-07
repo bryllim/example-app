@@ -26,6 +26,15 @@ class StudentController extends Controller
         return redirect()->route('home')->with('success', 'New student added.');
 
     }
+
+    public function delete(Request $request){
+        
+        $student = Student::find($request->student_id);
+        $studentname = $student->name;
+        $student->delete();
+
+        return redirect()->route('home')->with('deleted', $studentname.' has been deleted.');
+    }
 }
 
 ?>

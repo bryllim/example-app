@@ -3,9 +3,17 @@
 
 @if (Session::has('success'))
 <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 mb-5" role="alert">
-  <div class="flex">
-      <p class="text-sm text-center">{{ Session::get('success') }}</p>
-  </div>
+    <div class="flex">
+        <p class="text-sm text-center">{{ Session::get('success') }}</p>
+    </div>
+</div>
+@endif
+
+@if (Session::has('deleted'))
+<div class="bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 mb-5" role="alert">
+    <div class="flex">
+        <p class="text-sm text-center">{{ Session::get('deleted') }}</p>
+    </div>
 </div>
 @endif
 
@@ -33,6 +41,11 @@
                         Total Grade
                     </div>
                 </th>
+                <th class="p-4 font-medium text-left text-gray-900 whitespace-nowrap">
+                    <div class="flex items-center">
+                        Actions
+                    </div>
+                </th>
             </tr>
         </thead>
 
@@ -45,27 +58,36 @@
                 <td class="p-4 text-gray-700 whitespace-nowrap">{{ $student->email }}</td>
                 <td class="p-4 text-gray-700 whitespace-nowrap">
                     @if( count($student->subjects) > 0 )
-                            @foreach($student->subjects as $subject)
-                            <span class="ml-1 bg-blue-100 text-blue-700 py-1 px-3 rounded text-xs font-medium">
-                                {{ $subject->name }}
-                            </span>
-                            @endforeach
+                    @foreach($student->subjects as $subject)
+                    <span class="ml-1 bg-blue-100 text-blue-700 py-1 px-3 rounded text-xs font-medium">
+                        {{ $subject->name }}
+                    </span>
+                    @endforeach
                     @else
                     <span class="text-xs text-gray-700">None</span>
                     @endif
                 </td>
                 <td class="p-4 text-gray-700 whitespace-nowrap">
                     @if( count($student->subjects) > 0 )
-                        @if( $student->subjects->avg('grade') < 75)
-                        <strong class="bg-red-100 text-red-700 px-3 py-1.5 rounded text-xs font-medium">
-                            {{ $student->subjects->avg('grade') }}
+                    @if( $student->subjects->avg('grade') < 75) <strong
+                        class="bg-red-100 text-red-700 px-3 py-1.5 rounded text-xs font-medium">
+                        {{ $student->subjects->avg('grade') }}
                         </strong>
                         @else
                         <strong class="bg-green-100 text-green-700 px-3 py-1.5 rounded text-xs font-medium">
                             {{ $student->subjects->avg('grade') }}
                         </strong>
                         @endif
-                    @endif
+                        @endif
+                </td>
+                <td>
+                    <form onsubmit="return confirm('Do you really want to delete this student?');" action="{{ route('deletestudent') }}" method="post">
+                    @csrf
+                        <input type="hidden" name="student_id" value="{{ $student->id }}">
+                        <button type="submit" class="bg-red-300 hover:bg-red-400 text-xs text-red-800 py-1 px-2 rounded inline-flex items-center">
+                            Delete
+                        </button>
+                    </form>
                 </td>
             </tr>
             @endforeach

@@ -30,6 +30,10 @@ Route::post('/createstudent',
     [StudentController::class, 'create']
 )->name('createstudent');
 
+Route::post('/deletestudent',
+    [StudentController::class, 'delete']
+)->name('deletestudent');
+
 //------- Subject Routes //
 
 Route::get('/subjects', function () {
