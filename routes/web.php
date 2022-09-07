@@ -39,9 +39,3 @@ Route::get('/subjects', function () {
 Route::post('/addsubject',
     [SubjectController::class, 'create']
 )->name('addsubject');
-
-Route::get('/test', function(){
-    $temp = Student::find(4);
-    $allsubjects = $temp->subjects;
-    return ;
-});

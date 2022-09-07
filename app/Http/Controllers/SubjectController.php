@@ -15,6 +15,6 @@ class SubjectController extends Controller
         $subject->student_id = $request->student_id;
         $subject->save();
 
-        return "saved!";
+        return redirect()->route('home')->with('success', 'New subject added.');
     }
 }

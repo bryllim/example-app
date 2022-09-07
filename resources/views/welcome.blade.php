@@ -37,17 +37,35 @@
         </thead>
 
         <tbody class="divide-y divide-gray-100">
-            @foreach($students as $student)
+            @foreach($students->reverse() as $student)
             <tr>
                 <td class="p-4 font-medium text-gray-900 whitespace-nowrap">
                     {{ $student->name }}
                 </td>
                 <td class="p-4 text-gray-700 whitespace-nowrap">{{ $student->email }}</td>
-                <td class="p-4 text-gray-700 whitespace-nowrap">Math</td>
                 <td class="p-4 text-gray-700 whitespace-nowrap">
-                    <strong class="bg-red-100 text-red-700 px-3 py-1.5 rounded text-xs font-medium">
-                        {{ $student->totalgrade }}
-                    </strong>
+                    @if( count($student->subjects) > 0 )
+                            @foreach($student->subjects as $subject)
+                            <span class="ml-1 bg-blue-100 text-blue-700 py-1 px-3 rounded text-xs font-medium">
+                                {{ $subject->name }}
+                            </span>
+                            @endforeach
+                    @else
+                    <span class="text-xs text-gray-700">None</span>
+                    @endif
+                </td>
+                <td class="p-4 text-gray-700 whitespace-nowrap">
+                    @if( count($student->subjects) > 0 )
+                        @if( $student->subjects->avg('grade') < 75)
+                        <strong class="bg-red-100 text-red-700 px-3 py-1.5 rounded text-xs font-medium">
+                            {{ $student->subjects->avg('grade') }}
+                        </strong>
+                        @else
+                        <strong class="bg-green-100 text-green-700 px-3 py-1.5 rounded text-xs font-medium">
+                            {{ $student->subjects->avg('grade') }}
+                        </strong>
+                        @endif
+                    @endif
                 </td>
             </tr>
             @endforeach
