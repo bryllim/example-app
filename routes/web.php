@@ -5,6 +5,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Models\Student;
 use App\Models\Subject;
+use Carbon\Carbon;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,3 +45,9 @@ Route::get('/subjects', function () {
 Route::post('/addsubject',
     [SubjectController::class, 'create']
 )->name('addsubject');
+
+Route::get('/date', function (){
+    $subject = Subject::first();
+    $date = $subject->created_at->format('Y-m-d');
+    return $date;
+});
