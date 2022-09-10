@@ -5,7 +5,6 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Models\Student;
 use App\Models\Subject;
-use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,18 +35,20 @@ Route::post('/deletestudent',
     [StudentController::class, 'delete']
 )->name('deletestudent');
 
+Route::post('updatestudent',
+    [StudentController::class, 'update']
+)->name('updatestudent');
+
+Route::get('studentupdate/{id}', function($id) {
+    return view('studentupdate')->with('student', Student::find($id));
+})->name('studentupdate');
+
 //------- Subject Routes //
 
 Route::get('/subjects', function () {
-    return view('subjects')->with('students', Student::all());;
+    return view('subjects')->with('students', Student::all());
 })->name('subjects');
 
 Route::post('/addsubject',
     [SubjectController::class, 'create']
 )->name('addsubject');
-
-Route::get('/date', function (){
-    $subject = Subject::first();
-    $date = $subject->created_at->format('Y-m-d');
-    return $date;
-});

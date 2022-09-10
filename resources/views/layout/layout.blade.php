@@ -21,7 +21,7 @@
                 A simple app to demonstrate student management built with Laravel.
             </p>
             <div class="relative flex flex-col justify-center md:flex-row md:space-x-4">
-                @if(Route::is('addstudent') || Route::is('subjects'))
+                @if(Route::is('addstudent') || Route::is('subjects') || Route::is('studentupdate'))
                 <a href="{{ route('home') }}"
                     class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-gray-500 rounded-md md:mb-0 hover:bg-gray-700 md:w-auto"
                     data-primary="purple-500" data-rounded="rounded-md">

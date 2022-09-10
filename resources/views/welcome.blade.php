@@ -83,8 +83,11 @@
                 <td>
                     <form onsubmit="return confirm('Do you really want to delete this student?');" action="{{ route('deletestudent') }}" method="post">
                     @csrf
+                        <a href="{{ url('studentupdate/'.$student->id) }}" class="bg-gray-300 hover:bg-gray-400 text-xs text-gray-800 py-1 px-2 rounded mr-2 items-center">
+                            Update
+                        </a>
                         <input type="hidden" name="student_id" value="{{ $student->id }}">
-                        <button type="submit" class="bg-red-300 hover:bg-red-400 text-xs text-red-800 py-1 px-2 rounded inline-flex items-center">
+                        <button type="submit" class="bg-red-300 hover:bg-red-400 text-xs text-red-800 py-1 px-2 rounded items-center">
                             Delete
                         </button>
                     </form>

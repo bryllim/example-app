@@ -27,6 +27,15 @@ class StudentController extends Controller
 
     }
 
+    public function update(Request $request){
+        $student = Student::find($request->student_id);
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->save();
+
+        return redirect()->route('home')->with('success', 'Student updated.');
+    }
+
     public function delete(Request $request){
         
         $student = Student::find($request->student_id);
