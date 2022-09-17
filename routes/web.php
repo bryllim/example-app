@@ -5,6 +5,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Models\Student;
 use App\Models\Subject;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,3 +53,9 @@ Route::get('/subjects', function () {
 Route::post('/addsubject',
     [SubjectController::class, 'create']
 )->name('addsubject');
+
+Route::post('getsubjects', function(Request $request) {
+    $student = Student::find($request->id);
+    $subjects = $student->subjects;
+    return json_encode($subjects);
+})->name('getsubjects');
